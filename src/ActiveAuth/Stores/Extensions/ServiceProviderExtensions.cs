@@ -3,7 +3,7 @@
 
 using System;
 using System.Threading;
-using ActiveAuth.Models;
+using ActiveAuth.Providers;
 using Microsoft.AspNetCore.Http;
 
 namespace ActiveAuth.Stores.Extensions

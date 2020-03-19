@@ -212,5 +212,14 @@ namespace ActiveAuth {
                 return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation failed..
+        /// </summary>
+        public static string ValidationFailed {
+            get {
+                return ResourceManager.GetString("ValidationFailed", resourceCulture);
+            }
+        }
     }
 }

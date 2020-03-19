@@ -3,8 +3,9 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using ActiveAuth.Models;
 
-namespace ActiveAuth.Models
+namespace ActiveAuth.Providers
 {
 	public class NoQueryableProvider<T> : IQueryableProvider<T>
 	{

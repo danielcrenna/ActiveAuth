@@ -8,7 +8,6 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using ActiveAuth.Extensions;
-using ActiveAuth.Stores.Extensions;
 using ActiveAuth.Stores.Models;
 using Microsoft.AspNetCore.Identity;
 using TypeKitchen;

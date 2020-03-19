@@ -59,8 +59,6 @@ namespace ActiveAuth.Stores
 			}
 		}
 
-		public CancellationToken CancellationToken { get; }
-
 		public async Task<IdentityResult> CreateAsync(TRole role, CancellationToken cancellationToken)
 		{
 			cancellationToken.ThrowIfCancellationRequested();
@@ -169,6 +167,10 @@ namespace ActiveAuth.Stores
 			return roles.Data;
 		}
 
+		public void Dispose() { }
+
+		public CancellationToken CancellationToken { get; }
+
 		public async Task<int> GetCountAsync(CancellationToken cancellationToken)
 		{
 			cancellationToken.ThrowIfCancellationRequested();
@@ -176,8 +178,6 @@ namespace ActiveAuth.Stores
 			var count = await _store.CountAsync<TRole>(cancellationToken);
 			return (int) count.Data;
 		}
-
-		public void Dispose() { }
 
 		private async Task<IEnumerable<TRole>> GetAllRolesAsync(CancellationToken cancellationToken)
 		{

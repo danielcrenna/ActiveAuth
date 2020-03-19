@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace ActiveAuth.Stores.Extensions
+namespace ActiveAuth.Extensions
 {
 	public static class ClaimsExtensions
 	{

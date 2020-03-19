@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ActiveRoutes.Meta" Version="1.0.9" />
+    <PackageReference Include="ActiveVersion" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ActiveAuth\ActiveAuth.csproj" />
   </ItemGroup>
 

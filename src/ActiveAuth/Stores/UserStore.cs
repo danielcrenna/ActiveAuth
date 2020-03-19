@@ -9,11 +9,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using ActiveAuth.Extensions;
 using ActiveAuth.Models;
+using ActiveAuth.Providers;
 using ActiveAuth.Stores.Extensions;
 using ActiveAuth.Stores.Internal;
 using ActiveAuth.Stores.Models;
 using ActiveStorage;
 using Microsoft.AspNetCore.Identity;
+using TypeKitchen;
 
 namespace ActiveAuth.Stores
 {
@@ -22,13 +24,6 @@ namespace ActiveAuth.Stores
 		where TKey : IEquatable<TKey>
 		where TRole : IdentityRole<TKey>
 	{
-		private const string SuperUserDefaultUserName = "superuser";
-		private const string SuperUserDefaultEmail = "superuser@email.com";
-		private const string SuperUserDefaultPhoneNumber = "9999999999";
-		private const string SuperUserGuidId = "87BA0A16-7253-4A6F-A8D4-82DFA1F723C1";
-		private const string SuperUserSecurityStamp = "A2ECC018-9B97-420B-815E-9D5B595BFA86";
-		private const int SuperUserNumberId = int.MaxValue;
-
 		private readonly TKey _applicationId;
 		private readonly string _applicationName;
 
@@ -73,26 +68,6 @@ namespace ActiveAuth.Stores
 		}
 
 		public IQueryable<TUser> Users => MaybeQueryable();
-
-		public CancellationToken CancellationToken { get; }
-
-		public bool SupportsSuperUser => _superUserInfoProvider?.Enabled ?? false;
-
-		public async Task<IEnumerable<TUser>> FindAllByNameAsync(string normalizedUserName,
-			CancellationToken cancellationToken)
-		{
-			cancellationToken.ThrowIfCancellationRequested();
-
-			if (SupportsSuperUser &&
-			    normalizedUserName == _lookupNormalizer.MaybeNormalizeName(_superUserInfoProvider?.Username))
-			{
-				return new[] {CreateSuperUserInstance()};
-			}
-
-			var users = await _store.QueryByExampleAsync<TUser>(new {NormalizedUserName = normalizedUserName},
-				cancellationToken);
-			return users.Data;
-		}
 
 		public async Task<IdentityResult> CreateAsync(TUser user, CancellationToken cancellationToken)
 		{
@@ -146,7 +121,7 @@ namespace ActiveAuth.Stores
 		{
 			cancellationToken.ThrowIfCancellationRequested();
 
-			if (SupportsSuperUser && userId == SuperUserGuidId)
+			if (SupportsSuperUser && UserIdIsSuperUserId(userId))
 			{
 				return CreateSuperUserInstance();
 			}
@@ -219,6 +194,37 @@ namespace ActiveAuth.Stores
 		{
 		}
 
+		public CancellationToken CancellationToken { get; }
+
+		public bool SupportsSuperUser => _superUserInfoProvider?.Enabled ?? false;
+
+		public async Task<IEnumerable<TUser>> FindAllByNameAsync(string normalizedUserName,
+			CancellationToken cancellationToken)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			if (SupportsSuperUser &&
+			    normalizedUserName == _lookupNormalizer.MaybeNormalizeName(_superUserInfoProvider?.Username))
+			{
+				return new[] {CreateSuperUserInstance()};
+			}
+
+			var users = await _store.QueryByExampleAsync<TUser>(new {NormalizedUserName = normalizedUserName},
+				cancellationToken);
+			return users.Data;
+		}
+
+		private static bool UserIdIsSuperUserId(string userId)
+		{
+			if (typeof(TKey) == typeof(Guid))
+				return Guid.TryParse(userId, out var guid) && guid == Constants.SuperUserGuidId;
+
+			if (typeof(TKey).IsNumeric())
+				return int.TryParse(userId, out var number) && number == Constants.SuperUserNumberId;
+
+			return userId == Constants.SuperUserStringId;
+		}
+
 		private IQueryable<TUser> MaybeQueryable()
 		{
 			if (_queryable.IsSafe)
@@ -243,32 +249,32 @@ namespace ActiveAuth.Stores
 		private TUser CreateSuperUserInstance()
 		{
 			var superuser = Activator.CreateInstance<TUser>();
+
 			if (typeof(TKey) == typeof(Guid))
 			{
-				superuser.Id = (TKey) (object) Guid.Parse(SuperUserGuidId);
+				superuser.Id = (TKey) (object) Constants.SuperUserGuidId;
 			}
 			else if (typeof(TKey) == typeof(string))
 			{
-				superuser.Id = (TKey) (object) SuperUserGuidId;
+				superuser.Id = (TKey) (object) Constants.SuperUserStringId;
 			}
 			else
 			{
-				superuser.Id = (TKey) (object) SuperUserNumberId;
+				superuser.Id = (TKey) (object) Constants.SuperUserNumberId;
 			}
 
 			var options = _superUserInfoProvider;
 
-			superuser.UserName = options?.Username ?? SuperUserDefaultUserName;
+			superuser.UserName = options?.Username ?? Constants.SuperUserDefaultUserName;
 			superuser.NormalizedUserName = _lookupNormalizer.MaybeNormalizeName(superuser.UserName);
-			superuser.PhoneNumber =
-				_lookupNormalizer.MaybeNormalizeName(options?.PhoneNumber ?? SuperUserDefaultPhoneNumber);
+			superuser.PhoneNumber = _lookupNormalizer.MaybeNormalizeName(options?.PhoneNumber ?? Constants.SuperUserDefaultPhoneNumber);
 			superuser.PhoneNumberConfirmed = true;
-			superuser.Email = options?.Email ?? SuperUserDefaultEmail;
-			superuser.NormalizedEmail = _lookupNormalizer.MaybeNormalizeName(options?.Email ?? SuperUserDefaultEmail);
+			superuser.Email = options?.Email ?? Constants.SuperUserDefaultEmail;
+			superuser.NormalizedEmail = _lookupNormalizer.MaybeNormalizeName(options?.Email ?? Constants.SuperUserDefaultEmail);
 			superuser.EmailConfirmed = true;
 			superuser.LockoutEnabled = false;
 			superuser.TwoFactorEnabled = false;
-			superuser.SecurityStamp = SuperUserSecurityStamp;
+			superuser.SecurityStamp = Constants.SuperUserSecurityStamp;
 			superuser.ConcurrencyStamp = $"{Guid.NewGuid()}";
 			superuser.PasswordHash = _passwordHasher.HashPassword(superuser, options?.Password);
 

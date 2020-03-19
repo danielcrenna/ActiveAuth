@@ -8,6 +8,7 @@ using ActiveAuth.Configuration;
 using ActiveAuth.Events;
 using ActiveAuth.Extensions;
 using ActiveAuth.Models;
+using ActiveAuth.Providers;
 using ActiveErrors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;

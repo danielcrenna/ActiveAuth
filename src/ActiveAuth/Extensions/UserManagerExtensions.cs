@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 using ActiveAuth.Models;
+using ActiveAuth.Providers;
 using Microsoft.AspNetCore.Identity;
 using TypeKitchen;
 

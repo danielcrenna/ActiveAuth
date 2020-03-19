@@ -1,11 +1,10 @@
 // Copyright (c) Daniel Crenna & Contributors. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-namespace ActiveAuth.Models
+namespace ActiveAuth.Providers
 {
-	public interface IPhoneNumberProvider
+	public interface IUserNameProvider
 	{
-		string PhoneNumber { get; }
-		bool PhoneNumberConfirmed { get; }
+		string UserName { get; }
 	}
 }
