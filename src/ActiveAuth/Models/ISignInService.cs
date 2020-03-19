@@ -6,12 +6,9 @@ using ActiveErrors;
 
 namespace ActiveAuth.Models
 {
-	public interface ISignInService<TUser, TTenant, TApplication, TKey>
-		where TUser : class, IUserEmailProvider, IPhoneNumberProvider
+	public interface ISignInService<TUser> where TUser : class, IUserEmailProvider, IPhoneNumberProvider
 	{
-		Task<Operation<TUser>> SignInAsync(IdentityType identityType, string identity, string password,
-			bool persistent);
-
+		Task<Operation<TUser>> SignInAsync(IdentityType identityType, string identity, string password);
 		Task<Operation> SignOutAsync(TUser user);
 	}
 }

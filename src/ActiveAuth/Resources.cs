@@ -32,15 +32,15 @@ namespace ActiveAuth
 		}
 
 		/// <summary></summary>
-		internal static string FormatInvalidApplicationName(string ApplicationName)
+		internal static string FormatInvalidApplicationName(string applicationName)
 		{
-			return string.Format(CultureInfo.CurrentCulture, ErrorStrings.InvalidApplicationName, ApplicationName);
+			return string.Format(CultureInfo.CurrentCulture, ErrorStrings.InvalidApplicationName, applicationName);
 		}
 
 		/// <summary></summary>
-		internal static string FormatDuplicateApplicationName(string ApplicationName)
+		internal static string FormatDuplicateApplicationName(string applicationName)
 		{
-			return string.Format(CultureInfo.CurrentCulture, ErrorStrings.DuplicateApplicationName, ApplicationName);
+			return string.Format(CultureInfo.CurrentCulture, ErrorStrings.DuplicateApplicationName, applicationName);
 		}
 	}
 }
