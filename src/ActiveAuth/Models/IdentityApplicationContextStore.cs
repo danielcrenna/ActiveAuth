@@ -3,7 +3,6 @@
 
 using System.Threading.Tasks;
 using ActiveTenant;
-using HQ.Platform.Api.Models;
 
 namespace ActiveAuth.Models
 {

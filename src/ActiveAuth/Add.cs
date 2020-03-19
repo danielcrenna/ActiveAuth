@@ -12,7 +12,6 @@ using ActiveAuth.Services;
 using ActiveAuth.Validators;
 using ActiveLogging;
 using ActiveTenant;
-using HQ.Platform.Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
