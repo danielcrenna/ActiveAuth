@@ -14,26 +14,26 @@ namespace ActiveAuth.Configuration
 
 		public class ManageUsersPolicy : IFeatureScheme, IFeaturePolicy
 		{
-			public string Scheme { get; set; }
 			public string Policy { get; set; }
+			public string Scheme { get; set; }
 		}
 
 		public class ManageRolesPolicy : IFeatureScheme, IFeaturePolicy
 		{
-			public string Scheme { get; set; }
 			public string Policy { get; set; }
+			public string Scheme { get; set; }
 		}
 
 		public class ManageApplicationsPolicy : IFeatureScheme, IFeaturePolicy
 		{
-			public string Scheme { get; set; }
 			public string Policy { get; set; }
+			public string Scheme { get; set; }
 		}
 
 		public class ManageTenantsPolicy : IFeatureScheme, IFeaturePolicy
 		{
-			public string Scheme { get; set; }
 			public string Policy { get; set; }
+			public string Scheme { get; set; }
 		}
 	}
 }
