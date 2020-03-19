@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ActiveStorage\src\ActiveStorage\ActiveStorage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="ErrorStrings.Designer.cs">
       <DependentUpon>ErrorStrings.resx</DependentUpon>
       <DesignTime>True</DesignTime>
