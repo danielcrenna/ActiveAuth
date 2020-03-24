@@ -19,7 +19,7 @@ namespace ActiveAuth
 		public static class Tokens
 		{
 			public const string NoSigningKeySet = "PRIVATE-KEY-REPLACE-ME";
-			public const string NoEncryptionKeySet = "ENCRYPTION-KEY-REPLACE-ME";
+			public const string NoEncryptingKeySet = "ENCRYPTION-KEY-REPLACE-ME";
 		}
 
 		public static class ClaimValues

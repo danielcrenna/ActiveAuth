@@ -35,11 +35,11 @@ namespace ActiveAuth.Api
 		where TKey : IEquatable<TKey>
 	{
 		private readonly IIdentityClaimNameProvider _claimNameProvider;
-		private readonly ITokenFabricator _fabricator;
+		private readonly ITokenFabricator<TKey> _fabricator;
 		private readonly IValidOptionsSnapshot<SuperUserOptions> _options;
 
 		public SuperUserTokenController(IValidOptionsSnapshot<SuperUserOptions> options,
-			ITokenFabricator fabricator,
+			ITokenFabricator<TKey> fabricator,
 			IIdentityClaimNameProvider claimNameProvider)
 		{
 			_options = options;

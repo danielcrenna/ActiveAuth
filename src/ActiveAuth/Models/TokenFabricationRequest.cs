@@ -5,13 +5,17 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ActiveAuth.Models
 {
-	public class TokenFabricationRequest
+	public class TokenFabricationRequest : ITokenCredentials
 	{
-		public int TimeToLiveSeconds { get; set; }
-		public string Issuer { get; set; }
-		public string Audience { get; set; }
+		public int TokenTimeToLiveSeconds { get; set; }
+		public string TokenIssuer { get; set; }
+		public string TokenAudience { get; set; }
 		public bool Encrypt { get; set; }
-		public SigningCredentials SigningKeyString { get; set; }
-		public EncryptingCredentials EncryptionKeyString { get; set; }
+
+		public string SigningKeyString { get; set; } = Constants.Tokens.NoSigningKeySet;
+		public string EncryptingKeyString { get; set; } = Constants.Tokens.NoEncryptingKeySet;
+
+		public SigningCredentials SigningKey { get; set; }
+		public EncryptingCredentials EncryptingKey { get; set; }
 	}
 }

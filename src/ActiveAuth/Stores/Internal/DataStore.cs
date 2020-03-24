@@ -19,9 +19,14 @@ namespace ActiveAuth.Stores.Internal
 		private readonly IObjectCountStore _queryCount;
 		private readonly IObjectUpdateByExampleStore _updateByExample;
 
-		public DataStore(IObjectQueryByExampleStore queryByExample, IObjectCountStore queryCount,
-			IObjectCreateStore create, IObjectDeleteByExampleStore deleteByExample,
-			IObjectUpdateByExampleStore updateByExample)
+		public DataStore
+		(
+			IObjectCountStore queryCount,
+			IObjectQueryByExampleStore queryByExample,
+			IObjectCreateStore create,
+			IObjectDeleteByExampleStore deleteByExample,
+			IObjectUpdateByExampleStore updateByExample
+		)
 		{
 			_queryByExample = queryByExample;
 			_queryCount = queryCount;
@@ -68,6 +73,12 @@ namespace ActiveAuth.Stores.Internal
 			CancellationToken cancellationToken = default)
 		{
 			return await _queryByExample.QuerySingleOrDefaultByExampleAsync<T>(example, cancellationToken);
+		}
+
+		public async Task<Operation<T>> QueryFirstOrDefaultByExampleAsync<T>(object example,
+			CancellationToken cancellationToken = default)
+		{
+			return await _queryByExample.QueryFirstOrDefaultByExampleAsync<T>(example, cancellationToken);
 		}
 
 		public async Task<Operation<int>> UpdateByExampleAsync<T>(T @object, object example,

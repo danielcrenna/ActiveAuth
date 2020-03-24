@@ -14,9 +14,6 @@ namespace ActiveAuth.Models
 
 		public async Task<ITenantContext<TTenant>> FindByKeyAsync(string tenantKey)
 		{
-			// FIXME!
-			return null;
-
 			var tenant = await _tenantService.FindByNameAsync(tenantKey);
 			if (tenant?.Data == null)
 			{

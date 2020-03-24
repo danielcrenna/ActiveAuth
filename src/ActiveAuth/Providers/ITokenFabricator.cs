@@ -8,9 +8,8 @@ using ActiveAuth.Models;
 
 namespace ActiveAuth.Providers
 {
-	public interface ITokenFabricator
+	public interface ITokenFabricator<in TKey> where TKey : IEquatable<TKey>
 	{
-		string CreateToken<TKey>(IUserIdProvider<TKey> user, IEnumerable<Claim> claims = null)
-			where TKey : IEquatable<TKey>;
+		string CreateToken(IUserIdProvider<TKey> user, IEnumerable<Claim> claims = null);
 	}
 }

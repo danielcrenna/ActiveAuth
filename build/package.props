@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/danielcrenna/ActiveAuth</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>dynamic auth identity aspnet-core</PackageTags>
-    <Version>1.0.0</Version>
+    <Version>1.0.0-pre-0</Version>
     <PackageReleaseNotes>Initial implementation.</PackageReleaseNotes>
   </PropertyGroup>
 

@@ -31,7 +31,7 @@ namespace ActiveAuth.Api
 		where TApplication : IdentityApplication<TKey>
 		where TKey : IEquatable<TKey>
 	{
-		private readonly ITokenFabricator _fabricator;
+		private readonly ITokenFabricator<TKey> _fabricator;
 		private readonly IHttpContextAccessor _http;
 		private readonly ISafeLogger<TokenController<TUser, TTenant, TApplication, TKey>> _logger;
 		private readonly ISignInService<TUser> _signInService;
@@ -41,7 +41,7 @@ namespace ActiveAuth.Api
 			Func<DateTimeOffset> timestamps,
 			IHttpContextAccessor http,
 			ISignInService<TUser> signInService,
-			ITokenFabricator fabricator,
+			ITokenFabricator<TKey> fabricator,
 			ISafeLogger<TokenController<TUser, TTenant, TApplication, TKey>> logger)
 		{
 			_timestamps = timestamps;
