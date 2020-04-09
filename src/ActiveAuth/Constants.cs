@@ -22,6 +22,17 @@ namespace ActiveAuth
 			public const string NoEncryptingKeySet = "ENCRYPTION-KEY-REPLACE-ME";
 		}
 
+		public static class Claims
+		{
+			public const string ApplicationName = "appName";
+			public const string ApplicationId = "appId";
+			public const string Permission = "userPermission";
+			public const string Email = "userEmail";
+			public const string Role = "userRole";
+			public const string UserName = "userName";
+			public const string UserId = "userId";
+		}
+
 		public static class ClaimValues
 		{
 			public const string SuperUser = "superuser";

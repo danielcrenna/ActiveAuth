@@ -14,7 +14,5 @@ namespace ActiveAuth.Models
 		public TKey TenantId { get; set; }
 	}
 
-	public class IdentityUserExtended : IdentityUserExtended<string>
-	{
-	}
+	public class IdentityUserExtended : IdentityUserExtended<string> { }
 }

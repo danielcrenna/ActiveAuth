@@ -15,4 +15,11 @@ namespace ActiveAuth.Api
 		[Required]
 		public string Password { get; set; }
 	}
+
+	public class BearerTokenResponse
+	{
+		[Required] public IdentityType IdentityType { get; set; } = IdentityType.Username;
+
+		[Required] public string AccessToken { get; set; }
+	}
 }

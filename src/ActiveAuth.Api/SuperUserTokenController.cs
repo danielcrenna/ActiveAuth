@@ -22,14 +22,14 @@ using TypeKitchen;
 
 namespace ActiveAuth.Api
 {
+	// FIXME: defaults for headers should come from a dynamic source
+
 	/// <summary>
 	///     A light-weight token issuer that only works against a super user.
 	/// </summary>
-	[Route("tokens")]
 	[DynamicController(typeof(SuperUserOptions))]
-	[ApiExplorerSettings(IgnoreApi = false)]
-	[MetaCategory("Authentication", "Manages authenticating incoming users against policies and identities, if any.")]
 	[DisplayName("Tokens")]
+	[MetaCategory("Authentication", "Manages authenticating incoming users against policies and identities, if any.")]
 	[MetaDescription("Manages authentication tokens.")]
 	public class SuperUserTokenController<TKey> : Controller, IDynamicComponentEnabled<SuperUserFeature>
 		where TKey : IEquatable<TKey>
@@ -46,13 +46,9 @@ namespace ActiveAuth.Api
 			_fabricator = fabricator;
 			_claimNameProvider = claimNameProvider;
 		}
-
-		private bool Enabled => _options.Value.Enabled;
-
-		// FIXME: defaults for headers should come from a dynamic source
-
+		
 		[AllowAnonymous]
-		[DynamicHttpPost]
+		[DynamicHttpPost("")]
 		public Task<IActionResult> IssueToken([FromBody] BearerTokenRequest model,
 			[FromHeader(Name = ActiveTenant.Constants.MultiTenancy.ApplicationHeader)]
 			string application,
@@ -106,14 +102,19 @@ namespace ActiveAuth.Api
 
 			var token = _fabricator.CreateToken(user, claims);
 
-			return Task.FromResult((IActionResult) Ok(new {AccessToken = token}));
+			var response = new BearerTokenResponse
+			{
+				IdentityType = model.IdentityType,
+				AccessToken = token
+			};
+
+			return Task.FromResult((IActionResult) Ok(response));
 		}
 
-		[DynamicAuthorize(typeof(SuperUserOptions))]
-		[DynamicHttpPut]
+		[DynamicHttpPut("")]
 		public IActionResult VerifyToken()
 		{
-			if (!Enabled)
+			if (!_options.Value.Enabled)
 				return NotFound();
 
 			if (User.Identity == null)
