@@ -115,7 +115,7 @@ namespace ActiveAuth.Stores
 			}
 
 			var inserted = await _store.CreateAsync(user, cancellationToken);
-			Debug.Assert(inserted.Data == ObjectSave.Created);
+			Debug.Assert(inserted.Data == ObjectCreate.Created);
 			return IdentityResult.Success;
 		}
 

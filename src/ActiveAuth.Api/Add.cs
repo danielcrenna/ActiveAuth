@@ -74,8 +74,7 @@ namespace ActiveAuth.Api
 			mvcBuilder.Services.AddScoped<ISignInHandler, CookiesSignInHandler<TTenant, TApplication, TKey>>();
 
 			mvcBuilder.AddActiveRoute<TenantController<TTenant, TKey>, IdentityApiFeature, IdentityApiOptions>();
-			mvcBuilder
-				.AddActiveRoute<ApplicationController<TApplication, TKey>, IdentityApiFeature, IdentityApiOptions>();
+			mvcBuilder.AddActiveRoute<ApplicationController<TApplication, TKey>, IdentityApiFeature, IdentityApiOptions>();
 			mvcBuilder.AddActiveRoute<UserController<TUser, TTenant, TKey>, IdentityApiFeature, IdentityApiOptions>();
 			mvcBuilder.AddActiveRoute<RoleController<TRole, TKey>, IdentityApiFeature, IdentityApiOptions>();
 
@@ -95,9 +94,18 @@ namespace ActiveAuth.Api
 			return services;
 		}
 
-		public static IMvcCoreBuilder AddSuperUserTokenController<TKey>(this IMvcCoreBuilder mvcBuilder)
+		public static IMvcCoreBuilder AddSuperUserTokenController<TKey>(this IMvcCoreBuilder mvcBuilder, IConfiguration config)
 			where TKey : IEquatable<TKey>
 		{
+			return mvcBuilder.AddSuperUserTokenController<TKey>(config.FastBind);
+		}
+
+		public static IMvcCoreBuilder AddSuperUserTokenController<TKey>(this IMvcCoreBuilder mvcBuilder, Action<SuperUserOptions> configureAction = null)
+			where TKey : IEquatable<TKey>
+		{
+			if (configureAction != null)
+				mvcBuilder.Services.Configure(configureAction);
+
 			mvcBuilder.AddActiveRoute<SuperUserTokenController<TKey>, SuperUserFeature, SuperUserOptions>();
 			return mvcBuilder;
 		}

@@ -29,7 +29,7 @@ namespace ActiveAuth.Stores
 					TenantId = _tenantId
 				}, cancellationToken);
 
-			Debug.Assert(inserted.Data == ObjectSave.Created);
+			Debug.Assert(inserted.Data == ObjectCreate.Created);
 		}
 
 		public async Task RemoveLoginAsync(TUser user, string loginProvider, string providerKey,

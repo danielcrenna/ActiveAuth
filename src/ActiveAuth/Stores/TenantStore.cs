@@ -81,7 +81,7 @@ namespace ActiveAuth.Stores
 			}
 
 			var query = await _store.CreateAsync(tenant, cancellationToken);
-			Debug.Assert(query.Data == ObjectSave.Created);
+			Debug.Assert(query.Data == ObjectCreate.Created);
 
 			return IdentityResult.Success;
 		}

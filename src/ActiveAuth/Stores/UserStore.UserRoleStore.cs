@@ -31,7 +31,7 @@ namespace ActiveAuth.Stores
 					new AspNetUserRoles<TKey> {UserId = user.Id, RoleId = roleId, TenantId = _tenantId},
 					cancellationToken);
 
-				Debug.Assert(inserted.Data == ObjectSave.Created);
+				Debug.Assert(inserted.Data == ObjectCreate.Created);
 			}
 		}
 

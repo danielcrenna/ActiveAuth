@@ -45,8 +45,7 @@ namespace ActiveAuth.Stores.Internal
 			return await _queryCount.CountAsync<T>(cancellationToken);
 		}
 
-		public async Task<Operation<ObjectSave>> CreateAsync(object @object,
-			CancellationToken cancellationToken = default, params string[] fields)
+		public async Task<Operation<ObjectCreate>> CreateAsync(object @object, CancellationToken cancellationToken = default, params string[] fields)
 		{
 			return await _create.CreateAsync(@object, cancellationToken, fields);
 		}

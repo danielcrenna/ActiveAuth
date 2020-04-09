@@ -44,7 +44,7 @@ namespace ActiveAuth.Stores
 					ClaimValue = claim.Value
 				}, cancellationToken);
 
-			Debug.Assert(query.Data == ObjectSave.Created);
+			Debug.Assert(query.Data == ObjectCreate.Created);
 		}
 
 		public async Task RemoveClaimAsync(TRole role, Claim claim,
