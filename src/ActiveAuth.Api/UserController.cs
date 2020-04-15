@@ -26,7 +26,7 @@ namespace ActiveAuth.Api
 	[MetaCategory("Identity", "Manages application access controls.")]
 	[DisplayName("Users")]
 	[MetaDescription("Manages user accounts.")]
-	public class UserController<TUser, TTenant, TKey> : Controller, IDynamicComponentEnabled<IdentityApiFeature>
+	public class UserController<TUser, TTenant, TKey> : Controller, IDynamicFeatureToggle<IdentityApiFeature>
 		where TUser : IdentityUserExtended<TKey>
 		where TKey : IEquatable<TKey>
 	{

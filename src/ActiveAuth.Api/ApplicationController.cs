@@ -23,7 +23,7 @@ namespace ActiveAuth.Api
 	[DisplayName("Applications")]
 	[MetaDescription("Manages system applications.")]
 	public class ApplicationController<TApplication, TKey> : Controller,
-		IDynamicComponentEnabled<IdentityApiFeature>
+		IDynamicFeatureToggle<IdentityApiFeature>
 		where TApplication : IdentityApplication<TKey>
 		where TKey : IEquatable<TKey>
 	{

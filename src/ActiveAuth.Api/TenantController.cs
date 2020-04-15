@@ -23,7 +23,7 @@ namespace ActiveAuth.Api
 	[MetaCategory("Identity", "Manages application access controls.")]
 	[DisplayName("Tenants")]
 	[MetaDescription("Manages system tenants.")]
-	public class TenantController<TTenant, TKey> : Controller, IDynamicComponentEnabled<IdentityApiFeature>
+	public class TenantController<TTenant, TKey> : Controller, IDynamicFeatureToggle<IdentityApiFeature>
 		where TTenant : IdentityTenant<TKey>
 		where TKey : IEquatable<TKey>
 	{

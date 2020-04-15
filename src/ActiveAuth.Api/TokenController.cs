@@ -25,7 +25,7 @@ namespace ActiveAuth.Api
 	[DisplayName("Tokens")]
 	[MetaDescription("Manages authentication tokens.")]
 	public class TokenController<TUser, TTenant, TApplication, TKey> : Controller,
-		IDynamicComponentEnabled<TokenApiFeature>
+		IDynamicFeatureToggle<TokenApiFeature>
 		where TUser : IdentityUserExtended<TKey>
 		where TTenant : IdentityTenant<TKey>
 		where TApplication : IdentityApplication<TKey>

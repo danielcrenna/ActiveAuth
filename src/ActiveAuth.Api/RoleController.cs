@@ -26,7 +26,7 @@ namespace ActiveAuth.Api
 	[MetaCategory("Identity", "Manages application access controls.")]
 	[DisplayName("Roles")]
 	[MetaDescription("Manages system roles.")]
-	public class RoleController<TRole, TKey> : Controller, IDynamicComponentEnabled<IdentityApiFeature>
+	public class RoleController<TRole, TKey> : Controller, IDynamicFeatureToggle<IdentityApiFeature>
 		where TRole : IdentityRoleExtended<TKey>
 		where TKey : IEquatable<TKey>
 	{

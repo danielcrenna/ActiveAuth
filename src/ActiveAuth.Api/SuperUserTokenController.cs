@@ -31,7 +31,7 @@ namespace ActiveAuth.Api
 	[DisplayName("Tokens")]
 	[MetaCategory("Authentication", "Manages authenticating incoming users against policies and identities, if any.")]
 	[MetaDescription("Manages authentication tokens.")]
-	public class SuperUserTokenController<TKey> : Controller, IDynamicComponentEnabled<SuperUserFeature>
+	public class SuperUserTokenController<TKey> : Controller, IDynamicFeatureToggle<SuperUserFeature>
 		where TKey : IEquatable<TKey>
 	{
 		private readonly IIdentityClaimNameProvider _claimNameProvider;
